@@ -16,30 +16,27 @@ pipeline {
         stage('Build docker image') {
             steps {
                 script {
-                    docker.build("${DOCKER_IMAGE}")
+                    // Зберігаємо образ у змінну
+                    builtImage = docker.build(env.DOCKER_IMAGE)
                 }
             }
         }
 
         stage('Run tests') {
             steps {
-                script {
-                    sh "echo 'run some tests'"
-                }
+                sh "echo 'run some tests'"
             }
         }
 
         stage('Push to the docker registry') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
-                        docker.image("${DOCKER_IMAGE}").push()
+                    docker.withRegistry('https://index.docker.io/v1/', env.DOCKER_CREDENTIALS_ID) {
+                        builtImage.push()
                     }
                 }
             }
         }
     }
 }
-    
-    
-        
+
