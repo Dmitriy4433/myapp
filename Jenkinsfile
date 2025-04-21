@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_CREDENTIALS_ID = 'dockerhubkey'
-        DOCKER_IMAGE = 'dmitriy4433/myapp'
+        DOCKER_IMAGE = 'dmitriy5015/myapp'
     }
 
     stages {
