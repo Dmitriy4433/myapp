@@ -3,13 +3,13 @@ pipeline {
 
     environment {
         DOCKER_CREDENTIALS_ID = 'dockerhubkey'
-        DOCKER_IMAGE = 'destroyyer/myapp'
+        DOCKER_IMAGE = 'dmitriy4433/myapp'
     }
 
     stages {
         stage('Clone the repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/DeStroyyer/myapp.git'
+                git branch: 'main', url: 'https://github.com/Dmitriy4433/myapp.git'
             }
         }
 
