@@ -3,40 +3,43 @@ pipeline {
 
     environment {
         DOCKER_CREDENTIALS_ID = 'dockerhubkey'
-        DOCKER_IMAGE = 'dmitriy4433/myapp'
-    
+        DOCKER_IMAGE = 'destroyyer/myapp'
     }
 
     stages {
         stage('Clone the repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/Dmitriy4433/myapp.git'
+                git branch: 'main', url: 'https://github.com/DeStroyyer/myapp.git'
             }
         }
+
         stage('Build docker image') {
             steps {
                 script {
-                    docker.build(DOCKER_IMAGE)
+                    docker.build("${DOCKER_IMAGE}")
                 }
             }
         }
-        stage('Run testa') {
+
+        stage('Run tests') {
             steps {
                 script {
-                    sh "echo 'run sone tests'"
+                    sh "echo 'run some tests'"
                 }
             }
         }
+
         stage('Push to the docker registry') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
-                    docker.image(DOCKER_IMAGE).push()
+                    docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
+                        docker.image("${DOCKER_IMAGE}").push()
                     }
                 }
             }
-
         }
-
     }
 }
+    
+    
+        
